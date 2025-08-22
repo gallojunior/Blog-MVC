@@ -1,0 +1,46 @@
+@using System.Security.Claims
+@{
+    var isAuthenticated = User.Identity?.IsAuthenticated ?? false;
+    var userImage = isAuthenticated 
+        ? User.FindFirstValue(ClaimTypes.Uri) ?? "/img/users/user.png" 
+        : "/img/users/user.png";
+}
+
+<div class="nav-item dropdown me-2">
+    <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="@userImage" width="40" height="40" class="object-fit-cover rounded-5">
+    </button>
+    
+    @if (isAuthenticated)
+    {
+        <ul class="dropdown-menu" style="position:absolute!important; margin-left: -200px!important; width:250px">
+            <li>
+                <a class="dropdown-item" asp-action="Postagens">
+                    <i class="bi bi-receipt"></i> Gerenciar Postagens
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="#">
+                    <i class="bi bi-person-bounding-box"></i> Gerenciar Conta
+                </a>
+            </li>
+            <li>
+                <form method="POST" asp-action="Logout">
+                    <button type="submit" class="dropdown-item aling-middle">
+                        <i class="bi bi-door-closed"></i> Sair
+                    </button>
+                </form>
+            </li>
+        </ul>
+    }
+    else
+    {
+        <ul class="dropdown-menu" style="position:absolute!important; margin-left: -200px!important; width:250px">
+            <li>
+                <a class="dropdown-item" asp-action="Login" >
+                    <i class="bi bi-box-arrow-in-right"></i> Login
+                </a>
+            </li>
+        </ul>
+    }
+</div>

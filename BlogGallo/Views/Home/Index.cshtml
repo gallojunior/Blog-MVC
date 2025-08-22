@@ -1,0 +1,44 @@
+﻿@model List<Postagem>
+@{
+    ViewData["Title"] = "Home";
+}
+
+
+<div class="p-5 mb-4 bg-secondary rounded-3 text-white">
+    <div class="container-fluid text-center">
+        <h1 class="display-3 fw-bold">Blog do Gallo</h1>
+        <p class="fs-4">Confira aqui as últimas noticias e novidades do mundo!!!</p>
+    </div>
+</div>
+
+<div class="container pb-5">
+    <div class="row row-cols-1 row-cols-md-2 g-3">
+        @foreach (Postagem postagem in Model)
+        {
+            <div class="col">
+                <div class="card h-100">
+                    <div class="row h-100 g-0">
+                        <div class="col-md-4">
+                            <img src="@postagem.Thumbnail" class="img-fluid rounded-start h-100 object-fit-cover"
+                                alt="@postagem.Nome">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <button class="btn btn-sm text-white mb-2"
+                                    style="background-color: @postagem.Categoria.Cor">@postagem.Categoria.Nome</button>
+                                <h5 class="card-title">@postagem.Nome</h5>
+                                <p class="card-text">@postagem.Descricao</p>
+                                <p class="card-text d-flex justify-content-between">
+                                    <small class="text-body-secondary">
+                                        Postado em: @postagem.DataPostagem.ToString("dd/MM/yyyy hh:mm")
+                                    </small>
+                                    <a asp-action="Postagem" asp-route-id="@postagem.Id">Ler Mais</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

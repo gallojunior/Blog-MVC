@@ -1,0 +1,13 @@
+Configurando o GIT
+git config --global user.name GalloJunior
+git config --global user.email gallojunior@gmail.com
+
+Listar os SDK
+dotnet --list-sdks
+
+Criando um projeto MVC
+dotnet new mvc -o BlogGallo
+
+Executar o projeto
+cd BlogGallo
+dotnet watch run

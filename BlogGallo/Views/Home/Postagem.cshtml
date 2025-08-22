@@ -1,0 +1,48 @@
+@model Postagem
+@{
+    ViewData["Title"] = "Postagem";
+    List<Categoria> categorias = (List<Categoria>)ViewData["Categorias"];
+}
+
+<div class="container">
+    <div class="row my-5">
+        <div class="col-md-8">
+            <article class="blog-post mb-4">
+                <h2 class="blog-post-title">@Model.Nome</h2>
+                <p class="blog-post-meta">@Model.DataPostagem.ToString("dd 'de' MMMM 'de' yyyy")</p>
+                <p>@Model.Descricao</p>
+                <img src="@Model.Foto" alt="Blog Post Image" class="img-fluid mb-3">
+                <p>@Html.Raw(Model.Texto)
+                </p>
+            </article>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">Pesquisar</div>
+                <div class="card-body">
+                    <form>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Pesquisar por...">
+                            <button class="btn btn-outline-secondary" type="button"><i
+                                    class="bi bi-search"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">Categorias</div>
+                <div class="card-body">
+                    <ul class="list-unstyled mb-0">
+                        @foreach (var categoria in categorias)
+                        {
+                            <li><a href="#" class="mb-2 text-decoration-none">@categoria.Nome</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
